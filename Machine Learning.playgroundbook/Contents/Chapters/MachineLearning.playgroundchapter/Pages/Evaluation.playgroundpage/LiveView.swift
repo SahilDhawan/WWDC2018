@@ -1,4 +1,5 @@
-MLRobot().evaluateModel()
+let object = MLRobot()
+object.evaluateModel()
 
 
 

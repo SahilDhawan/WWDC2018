@@ -1,5 +1,6 @@
 // Remove MLRobot from view
-MoveRobot().removeRobot()
+let object = MoveRobot()
+object.removeRobot()
 
 
 

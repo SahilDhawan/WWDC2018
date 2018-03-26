@@ -14,6 +14,8 @@
  Hint: MachineLearning().gatherData()
  */
 
-MachineLearning().gatherData()
+//#-code-completion(everything,hide)
+//#-code-completion(identifier, show, gatherData())
+MachineLearning()/*#-editable-code*/.gatherData()/*#-end-editable-code*/
 
 

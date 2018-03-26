@@ -1,4 +1,5 @@
 // Present Robot
 
-MoveRobot().presentRobot()
+let object = MoveRobot()
+object.presentRobot()
 

@@ -11,20 +11,26 @@ public class MachineLearning {
     }
     
     public func gatherData(){
-        
+        // array representing different weights of data
         let array = [2,3,10,5,8,7]
-        let greenColor = UIColor(displayP3Red: 83/255, green: 136/255, blue: 26/255, alpha: 1.0)
         
+        let greenColor = UIColor(displayP3Red: 83/255, green: 136/255, blue: 26/255, alpha: 1.0)
+         let backgroundColor = UIColor(displayP3Red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
+        
+        //intialising live view
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 700))
         view.backgroundColor = UIColor.white
         
+        // an array to store bar graph views
         var barGraphViewArray : [UIView] = []
         
+        // sorting the array in descending order using sorting closure
         let sortedArray = array.sorted { (a, b) -> Bool in
             return a > b
         }
         let biggestValue = sortedArray.first
-        let backgroundColor = UIColor(displayP3Red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
+        
+       // initialising view as a background view for bar views
         let backgroundView = UIView()
         
         backgroundView.frame.size = CGSize(width: 330, height: -(biggestValue!+2)*25)
@@ -34,6 +40,7 @@ public class MachineLearning {
         backgroundView.center = view.center
         view.addSubview(backgroundView)
         
+        // initialising gathering label
         let gatheringLabel = UILabel()
         gatheringLabel.text = "Gathering Data"
         gatheringLabel.textColor = backgroundColor
@@ -44,7 +51,7 @@ public class MachineLearning {
         gatheringLabel.center.y = view.center.y - 200
         view.addSubview(gatheringLabel)
         
-        
+        //initialising preparation label
         let preparationLabel = UILabel()
         preparationLabel.text = "Data Preparation"
         preparationLabel.textColor = backgroundColor
@@ -56,7 +63,7 @@ public class MachineLearning {
         preparationLabel.alpha = 0.0
         view.addSubview(preparationLabel)
         
-        
+        // adding bar graph views to live view
         for i in 0..<array.count {
             let barView = UIView()
             let value = array[i]
@@ -70,16 +77,15 @@ public class MachineLearning {
             
             barGraphViewArray.append(barView)
             
+            // animating height of bar graph views
             UIView.animate(withDuration: 1.0, animations: {
                 let partialValue = value * 25
-                
                 barView.frame.size.height = CGFloat(-1 * partialValue)
-                
                 view.addSubview(barView)
             })
         }
         
-        
+        // animating bar graph views position
         UIView.animate(withDuration: 1.5, delay: 2.0, options: .curveEaseIn, animations: {
             gatheringLabel.alpha = 0.0
             preparationLabel.alpha = 1.0
@@ -90,26 +96,30 @@ public class MachineLearning {
             barGraphViewArray[3].frame.origin.x -= 2*50
         }) { (true) in
             
-            
+            // changing alpha of background view from 1.0 to 0.0
             UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
                 
                 backgroundView.alpha = 0.0
                 
+                // separating bar graph views into testing data
                 for i in 0..<array.count - 2 {
                     barGraphViewArray[i].frame.origin.x -= 25
                 }
                 
-                for barView in barGraphViewArray {
-                    barView.backgroundColor = backgroundColor
+                for i in 0...3 {
+                    barGraphViewArray[i].backgroundColor = backgroundColor
                 }
                 
+                // separating bar graph views into evaluation data
+                barGraphViewArray[4].backgroundColor = greenColor
+                barGraphViewArray[5].backgroundColor = greenColor
                 barGraphViewArray[4].frame.origin.x += 30
                 barGraphViewArray[5].frame.origin.x += 30
             }) { (true) in
                 
+                // adding training data label to live view
                 let label1 = UILabel()
-                barGraphViewArray[4].backgroundColor = greenColor
-                barGraphViewArray[5].backgroundColor = greenColor
+              
                 label1.text = "Training Data"
                 label1.textColor = backgroundColor
                 label1.font = UIFont.systemFont(ofSize: 20)
@@ -119,9 +129,9 @@ public class MachineLearning {
                 label1.numberOfLines = 0
                 label1.frame.origin.x = backgroundView.frame.origin.x + 40
                 label1.frame.origin.y = view.center.y + 150
-                //        label1.backgroundColor = UIColor.red
                 view.addSubview(label1)
                 
+                // adding evaluation data label to live view
                 let label2 = UILabel()
                 label2.text = "Evaluation Data"
                 label2.textColor = backgroundColor
@@ -134,34 +144,44 @@ public class MachineLearning {
                 label2.frame.origin.y = view.center.y + 150
                 label2.textColor = greenColor
                 view.addSubview(label2)
+                
+                //showing success alert
                 PlaygroundPage.current.assessmentStatus = .pass(message: "Great job gathering the data! Lets move to [Next Step](@next)  of Machine Learning.")
                 
             }
         }
         PlaygroundPage.current.liveView = view
-        
-        //swap values as well
-        
     }
     
     //Choosing Model
     
-    let imageView1 = UIImageView()
-    let imageView2 = UIImageView()
-    let imageView3 = UIImageView()
+    let imageModelImageView = UIImageView()
+    let musicModelImageView = UIImageView()
+    let textModelImageView = UIImageView()
     let textLabel = UILabel()
-    let robotView = UIImageView()
+    let mlRobotImageView = UIImageView()
     
+    // initialising custom view for live view
     let chooseModelView = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 700))
     
+    // public enum for model selection
+    public enum Model {
+        case textModel
+        case imageModel
+        case musicModel
+    }
+    
+    //setting up default view
     public func setupChooseModelView(){
         self.chooseModelView.backgroundColor = UIColor.white
         
-        self.robotView.image = UIImage(named : "mlrobot.png")
-        self.robotView.frame.size = CGSize(width: 225, height: 375)
-        self.robotView.alpha = 0.0
-        self.chooseModelView.addSubview(robotView)
+        //setting up robotView
+        self.mlRobotImageView.image = UIImage(named : "mlrobot.png")
+        self.mlRobotImageView.frame.size = CGSize(width: 225, height: 375)
+        self.mlRobotImageView.alpha = 0.0
+        self.chooseModelView.addSubview(mlRobotImageView)
         
+        //setting up textLabel
         self.textLabel.text = "Choosing Model"
         self.textLabel.textColor =  UIColor.darkGray
         self.textLabel.center.x = 100
@@ -172,100 +192,119 @@ public class MachineLearning {
         
         self.chooseModelView.addSubview(textLabel)
         
-        self.imageView1.frame.size = CGSize(width: 150, height: 150)
-        self.imageView1.frame.origin = CGPoint(x: 100, y: 200)
-        self.imageView1.image = UIImage(named: "imageModel.png")
-        self.imageView1.contentMode = .scaleAspectFit
+        // adding models as UIImageView to live view
+        self.imageModelImageView.frame.size = CGSize(width: 150, height: 150)
+        self.imageModelImageView.frame.origin = CGPoint(x: 100, y: 200)
+        self.imageModelImageView.image = UIImage(named: "imageModel.png")
+        self.imageModelImageView.contentMode = .scaleAspectFit
         
-        self.imageView2.frame.size = CGSize(width: 150, height: 150)
-        self.imageView2.frame.origin = CGPoint(x: 100, y: 400)
-        self.imageView2.image = UIImage(named: "musicModel.png")
-        self.imageView2.contentMode = .scaleAspectFit
+        self.musicModelImageView.frame.size = CGSize(width: 150, height: 150)
+        self.musicModelImageView.frame.origin = CGPoint(x: 100, y: 400)
+        self.musicModelImageView.image = UIImage(named: "musicModel.png")
+        self.musicModelImageView.contentMode = .scaleAspectFit
         
-        self.imageView3.frame.size = CGSize(width: 150, height: 150)
-        self.imageView3.frame.origin = CGPoint(x: 300, y: 300)
-        self.imageView3.image = UIImage(named: "textModel.png")
-        self.imageView3.contentMode = .scaleAspectFit
+        self.textModelImageView.frame.size = CGSize(width: 150, height: 150)
+        self.textModelImageView.frame.origin = CGPoint(x: 300, y: 300)
+        self.textModelImageView.image = UIImage(named: "textModel.png")
+        self.textModelImageView.contentMode = .scaleAspectFit
         
-        self.chooseModelView.addSubview(imageView1)
-        self.chooseModelView.addSubview(imageView2)
-        self.chooseModelView.addSubview(imageView3)
+        self.chooseModelView.addSubview(imageModelImageView)
+        self.chooseModelView.addSubview(musicModelImageView)
+        self.chooseModelView.addSubview(textModelImageView)
         
         PlaygroundPage.current.liveView = self.chooseModelView
     }
     
-    public func chooseModel(_ model : String){
-        
+    public func chooseModel(_ model : Model){
+    
+        // setting up basic layout
         setupChooseModelView()
 
+        // switch case for model
         switch model {
-        case "imageModel":
+            // if model is imageModel
+        case .imageModel:
             UIView.animate(withDuration: 1.0
                 , animations: {
-                    self.imageView2.alpha = 0.0
-                    self.imageView3.alpha = 0.0
-                    self.imageView1.frame.size = CGSize(width: 30, height: 30)
-                    self.robotView.alpha = 1.0
+                    // hiding musicModel and textModel
+                    self.musicModelImageView.alpha = 0.0
+                    self.textModelImageView.alpha = 0.0
                     
-                    self.textLabel.textColor = UIColor.darkGray
-                    self.textLabel.alpha = 0.0
-                    self.imageView1.center = self.chooseModelView.center
-                    self.robotView.center = self.chooseModelView.center
-                    self.imageView1.frame.origin.y += 55
-            }, completion: { (true) in
-                
-                self.imageView1.image = UIImage(named : "imageModelGreen")
-                PlaygroundPage.current.assessmentStatus = .pass(message: "Great job choosing model! Lets move to [Next Step](@next)  of Machine Learning.")
-                
-            })
-            break
-        case "musicModel":
-            
-            UIView.animate(withDuration: 1.0
-                , animations: {
-                    self.imageView1.alpha = 0.0
-                    self.imageView3.alpha = 0.0
-                    self.imageView2.frame.size = CGSize(width: 35, height: 35)
-                    self.robotView.alpha = 1.0
+                    //changing alpha of mlRobotImageView from 0.0 to 1.0
+                    self.mlRobotImageView.alpha = 1.0
+                    self.mlRobotImageView.center = self.chooseModelView.center
                     
-                    self.textLabel.textColor = UIColor.darkGray
+                    //changing alpha of textLabel from 1.0 to 0.0
                     self.textLabel.alpha = 0.0
-                    self.imageView2.center = self.chooseModelView.center
-                    self.robotView.center = self.chooseModelView.center
-                    self.imageView2.frame.origin.y += 55
+                    
+                    // animating imageModelImageView
+                    self.imageModelImageView.frame.size = CGSize(width: 30, height: 30)
+                    self.imageModelImageView.center = self.chooseModelView.center
+                    self.imageModelImageView.frame.origin.y += 55
             }, completion: { (true) in
                 
-                self.imageView2.image = UIImage(named : "musicModelGreen.png")
-                PlaygroundPage.current.assessmentStatus = .pass(message: "Great job choosing model! Lets move to [Next Step](@next)  of Machine Learning.")
+                //changing image of imageModelImageView
+                self.imageModelImageView.image = UIImage(named : "imageModelGreen")
                 
             })
-            
             break
-        case "textModel":
-            
+        case .musicModel:
+            //if model is music model
             UIView.animate(withDuration: 1.0
                 , animations: {
-                    self.imageView1.alpha = 0.0
-                    self.imageView2.alpha = 0.0
-                    self.imageView3.frame.size = CGSize(width: 25, height: 25)
-                    self.robotView.alpha = 1.0
+                    // hiding imageModelImageView and textModelImageView
+                    self.imageModelImageView.alpha = 0.0
+                    self.textModelImageView.alpha = 0.0
+                    
+                    //changing alpha of mlRobotImageView from 0.0 to 1.0
+                    self.mlRobotImageView.alpha = 1.0
+                    self.mlRobotImageView.center = self.chooseModelView.center
+                    
+                    //changing alpha of textLabel from 1.0 to 0.0
                     self.textLabel.alpha = 0.0
-                    self.imageView3.center = self.chooseModelView.center
-                    self.robotView.center = self.chooseModelView.center
-                    self.imageView3.frame.origin.y += 55
+                    
+                    //aniamting musicModelImageView
+                    self.musicModelImageView.frame.size = CGSize(width: 35, height: 35)
+                    self.musicModelImageView.center = self.chooseModelView.center
+                    self.musicModelImageView.frame.origin.y += 55
             }, completion: { (true) in
                 
-                self.imageView3.image = UIImage(named : "textModelGreen.png")
-                PlaygroundPage.current.assessmentStatus = .pass(message: "Great job choosing model! Lets move to [Next Step](@next)  of Machine Learning.")
+                //changing image of musicModelImageView
+                self.musicModelImageView.image = UIImage(named : "musicModelGreen.png")
+                
             })
             
             break
-        default:
-            //todo
+        case .textModel:
+            // if model is textModel
+            UIView.animate(withDuration: 1.0
+                , animations: {
+                    
+                    //hiding imageModelImageView and musicModelImageView
+                    self.imageModelImageView.alpha = 0.0
+                    self.musicModelImageView.alpha = 0.0
+                    
+                    //changing alpha of mlRobotImageView from 0.0 to 1.0
+                    self.mlRobotImageView.alpha = 1.0
+                    self.mlRobotImageView.center = self.chooseModelView.center
+                    
+                    //changing alpha of textLabel from 1.0 to 0.0
+                    self.textLabel.alpha = 0.0
+                    
+                    //animating textModelImageView
+                    self.textModelImageView.frame.size = CGSize(width: 25, height: 25)
+                    self.textModelImageView.center = self.chooseModelView.center
+                    self.textModelImageView.frame.origin.y += 55
+            }, completion: { (true) in
+                //changing image of textModelImageView
+                self.textModelImageView.image = UIImage(named : "textModelGreen.png")
+            })
+            
             break
         }
         
-
+        //showing success alert
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Great job choosing model! Lets move to [Next Step](@next)  of Machine Learning.")
     }
     
 }

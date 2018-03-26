@@ -24,6 +24,5 @@
  */
 
 //#-hidden-code
-MoveRobot().presentRobot()
-//#-end-hidden-code
- 
+let object = MoveRobot()
+object.presentRobot()

@@ -7,4 +7,8 @@
  This process then repeats. Each iteration or cycle of updating the values is called one training “step”.
  */
 
-MLRobot().trainModel()
+//#-code-completion(everything,hide)
+//#-code-completion(identifier, show, trainModel())
+
+let mlRobot = MLRobot()
+mlRobot/*#-editable-code*/.trainModel()/*#-end-editable-code*/

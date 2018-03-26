@@ -7,6 +7,10 @@
  
  */
 
+//#-hidden-code
+let object = MLRobot()
+object.evaluateModel()
+
 
 
 

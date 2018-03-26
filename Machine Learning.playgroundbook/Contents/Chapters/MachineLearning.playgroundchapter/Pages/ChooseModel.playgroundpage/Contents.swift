@@ -10,9 +10,8 @@
  
  Pass the name of the model in the chooseModel function to select one of the models.
  
- Hint: chooseModel("imageModel")
+ Hint: MachineLearning().chooseModel(.imageModel)
  */
-
-
-let object = MachineLearning()
-// object.chooseModel("textModel")
+//#-code-completion(everything,hide)
+//#-code-completion(bookauxiliarymodule, show, textModel, imageModel, musicModel)
+MachineLearning().chooseModel(/*#-editable-code*/.imageModel/*#-end-editable-code*/)
