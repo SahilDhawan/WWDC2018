@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Version</key>
+	<string>1.0</string>
+	<key>Name</key>
+	<string>Machine Learning</string>
+	<key>LiveViewEdgeToEdge</key>
+	<true/>
+	<key>Pages</key>
+	<array>
+		<string>Introduction.playgroundpage</string>
+		<string>Types.playgroundpage</string>
+		<string>GatheringData.playgroundpage</string>
+		<string>ChooseModel.playgroundpage</string>
+		<string>Training.playgroundpage</string>
+		<string>Evaluation.playgroundpage</string>
+		<string>CoreML.playgroundpage</string>
+		<string>Conclusion.playgroundpage</string>
+	</array>
+</dict>
+</plist>

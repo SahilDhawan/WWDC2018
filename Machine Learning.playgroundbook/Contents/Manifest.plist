@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Version</key>
+	<string>1.0</string>
+	<key>ContentVersion</key>
+	<string>1.0</string>
+	<key>Name</key>
+	<string>Machine Learning and Core ML</string>
+	<key>Description</key>
+	<string>By Sahil Dhawan</string>
+	<key>ContentIdentifier</key>
+	<string>com.example.apple-samplecode.Starter</string>
+	<key>ImageReference</key>
+	<string>ml.png</string>
+	<key>DeploymentTarget</key>
+	<string>ios10.0</string>
+	<key>Chapters</key>
+	<array>
+		<string>MachineLearning.playgroundchapter</string>
+	</array>
+</dict>
+</plist>
