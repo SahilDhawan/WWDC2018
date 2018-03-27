@@ -12,7 +12,7 @@ public class MLRobot {
         do {
             self.audioPlayer = try AVAudioPlayer(contentsOf: talkingSoundUrl)
             self.audioPlayer.prepareToPlay()
-            self.audioPlayer.volume = 0.5
+            self.audioPlayer.volume = 1.0
         } catch {
             print(error)
         }

@@ -10,12 +10,14 @@
  We’ll also need to split the data in two parts. The first part, used in training our model, will be the majority of the dataset. The second part will be used for evaluating our trained model’s performance.
  
  Lets start with the data gathering and preparing process by calling the gatherData function.
+ Pass the gatheringDataArray to gatherData function
 
- Hint: MachineLearning().gatherData()
+ Hint: MachineLearning().gatherData(gatheringDataArray)
+ 
+ Hint: Values in array should be between 1 and 10 and the length of array should not exceed 6
  */
 
-//#-code-completion(everything,hide)
-//#-code-completion(identifier, show, gatherData())
-MachineLearning()/*#-editable-code*/.gatherData()/*#-end-editable-code*/
+let gatheringDataArray = [3,10,8,7,4,5]
+MachineLearning().gatherData(gatheringDataArray)
 
 

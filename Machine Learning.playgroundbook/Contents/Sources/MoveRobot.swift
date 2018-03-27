@@ -9,6 +9,7 @@ import AVFoundation
 public class MoveRobot {
     var audioPlayer = AVAudioPlayer()
     var clapsAudioPlayer  = AVAudioPlayer()
+    var movementAudioPlayer = AVAudioPlayer()
     
     public init(){
         let talkingSoundPath = Bundle.main.path(forResource: "talking", ofType: "mp3")
@@ -20,8 +21,7 @@ public class MoveRobot {
         } catch {
             print(error)
         }
-        
-        
+
         let clapsSoundPath = Bundle.main.path(forResource: "claps", ofType: "mp3")
         let clapsSoundUrl = URL(fileURLWithPath: clapsSoundPath!)
         do {
@@ -38,11 +38,7 @@ public class MoveRobot {
         //initialising live view
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 512, height: 1024))
         view.backgroundColor = UIColor.white
-        
-        
-        let talkingSoundPath = Bundle.main.path(forResource: "talking", ofType: "mp3")
-        let talkingSoundUrl = URL(fileURLWithPath: talkingSoundPath!)
-        
+   
         // initialising mlRobotImageView as UIImageView
         let mlRobotImageView = UIImageView(frame: CGRect(x: 512, y: 100, width: 225, height: 375))
         mlRobotImageView.image = UIImage(named : "mlrobot.png")
@@ -59,6 +55,7 @@ public class MoveRobot {
         
         UIView.animate(withDuration: 1.0, animations: {
             //changing horizontal position of mlRobotImageView to center of view
+            
             mlRobotImageView.center.x = view.center.x
 
         }) { (true) in

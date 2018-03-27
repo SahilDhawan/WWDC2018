@@ -10,147 +10,158 @@ public class MachineLearning {
         // Initialiser
     }
     
-    public func gatherData(){
+    public func gatherData(_ data : [Int]){
         // array representing different weights of data
-        let array = [2,3,10,5,8,7]
-        
-        let greenColor = UIColor(displayP3Red: 83/255, green: 136/255, blue: 26/255, alpha: 1.0)
-         let backgroundColor = UIColor(displayP3Red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
-        
-        //intialising live view
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 700))
-        view.backgroundColor = UIColor.white
-        
-        // an array to store bar graph views
-        var barGraphViewArray : [UIView] = []
-        
-        // sorting the array in descending order using sorting closure
-        let sortedArray = array.sorted { (a, b) -> Bool in
-            return a > b
-        }
-        let biggestValue = sortedArray.first
-        
-       // initialising view as a background view for bar views
-        let backgroundView = UIView()
-        
-        backgroundView.frame.size = CGSize(width: 330, height: -(biggestValue!+2)*25)
-        backgroundView.backgroundColor = backgroundColor
-        backgroundView.clipsToBounds = true
-        backgroundView.layer.cornerRadius = 20
-        backgroundView.center = view.center
-        view.addSubview(backgroundView)
-        
-        // initialising gathering label
-        let gatheringLabel = UILabel()
-        gatheringLabel.text = "Gathering Data"
-        gatheringLabel.textColor = backgroundColor
-        gatheringLabel.frame.size = CGSize(width: 350, height: 50)
-        gatheringLabel.textAlignment = .center
-        gatheringLabel.font = UIFont.boldSystemFont(ofSize: 35)
-        gatheringLabel.center.x = view.center.x
-        gatheringLabel.center.y = view.center.y - 200
-        view.addSubview(gatheringLabel)
-        
-        //initialising preparation label
-        let preparationLabel = UILabel()
-        preparationLabel.text = "Data Preparation"
-        preparationLabel.textColor = backgroundColor
-        preparationLabel.frame.size = CGSize(width: 350, height: 50)
-        preparationLabel.textAlignment = .center
-        preparationLabel.font = UIFont.boldSystemFont(ofSize: 35)
-        preparationLabel.center.x = view.center.x
-        preparationLabel.center.y = view.center.y - 200
-        preparationLabel.alpha = 0.0
-        view.addSubview(preparationLabel)
-        
-        // adding bar graph views to live view
-        for i in 0..<array.count {
-            let barView = UIView()
-            let value = array[i]
-            let preHorizontalValue = backgroundView.frame.origin.x + 20.0
-            barView.frame.origin.x = CGFloat(i*50) + preHorizontalValue
-            barView.frame.origin.y = backgroundView.frame.origin.y + backgroundView.frame.height - 20
-            barView.layer.borderColor = UIColor.black.cgColor
-            barView.layer.borderWidth = 0.5
-            barView.frame.size = CGSize(width: 40, height: 0)
-            barView.backgroundColor = UIColor.white
+        if data.count <= 6 {
             
-            barGraphViewArray.append(barView)
+            let filterArray = data.filter({$0 > 10 || $0 <= 0})
+            if filterArray.count > 0 {
+                  PlaygroundPage.current.assessmentStatus = .fail(hints: ["Value in array should not exceed 10 or be less than 1"], solution: nil)
+            } else {
             
-            // animating height of bar graph views
-            UIView.animate(withDuration: 1.0, animations: {
-                let partialValue = value * 25
-                barView.frame.size.height = CGFloat(-1 * partialValue)
-                view.addSubview(barView)
-            })
-        }
-        
-        // animating bar graph views position
-        UIView.animate(withDuration: 1.5, delay: 2.0, options: .curveEaseIn, animations: {
-            gatheringLabel.alpha = 0.0
-            preparationLabel.alpha = 1.0
-            barGraphViewArray[0].frame.origin.x += 2*50
-            barGraphViewArray[2].frame.origin.x -= 2*50
+            let array = data
             
-            barGraphViewArray[1].frame.origin.x += 2*50
-            barGraphViewArray[3].frame.origin.x -= 2*50
-        }) { (true) in
+            let greenColor = UIColor(displayP3Red: 83/255, green: 136/255, blue: 26/255, alpha: 1.0)
+            let backgroundColor = UIColor(displayP3Red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
             
-            // changing alpha of background view from 1.0 to 0.0
-            UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
+            //intialising live view
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 700))
+            view.backgroundColor = UIColor.white
+            
+            // an array to store bar graph views
+            var barGraphViewArray : [UIView] = []
+            
+            // sorting the array in descending order using sorting closure
+            let sortedArray = array.sorted { (a, b) -> Bool in
+                return a > b
+            }
+            let biggestValue = sortedArray.first
+            
+            // initialising view as a background view for bar views
+            let backgroundView = UIView()
+            
+            backgroundView.frame.size = CGSize(width: 330, height: -(biggestValue!+2)*25)
+            backgroundView.backgroundColor = backgroundColor
+            backgroundView.clipsToBounds = true
+            backgroundView.layer.cornerRadius = 20
+            backgroundView.center = view.center
+            view.addSubview(backgroundView)
+            
+            // initialising gathering label
+            let gatheringLabel = UILabel()
+            gatheringLabel.text = "Gathering Data"
+            gatheringLabel.textColor = backgroundColor
+            gatheringLabel.frame.size = CGSize(width: 350, height: 50)
+            gatheringLabel.textAlignment = .center
+            gatheringLabel.font = UIFont.boldSystemFont(ofSize: 35)
+            gatheringLabel.center.x = view.center.x
+            gatheringLabel.center.y = view.center.y - 200
+            view.addSubview(gatheringLabel)
+            
+            //initialising preparation label
+            let preparationLabel = UILabel()
+            preparationLabel.text = "Data Preparation"
+            preparationLabel.textColor = backgroundColor
+            preparationLabel.frame.size = CGSize(width: 350, height: 50)
+            preparationLabel.textAlignment = .center
+            preparationLabel.font = UIFont.boldSystemFont(ofSize: 35)
+            preparationLabel.center.x = view.center.x
+            preparationLabel.center.y = view.center.y - 200
+            preparationLabel.alpha = 0.0
+            view.addSubview(preparationLabel)
+            
+            // adding bar graph views to live view
+            for i in 0..<array.count {
+                let barView = UIView()
+                let value = array[i]
+                let preHorizontalValue = backgroundView.frame.origin.x + 20.0
+                barView.frame.origin.x = CGFloat(i*50) + preHorizontalValue
+                barView.frame.origin.y = backgroundView.frame.origin.y + backgroundView.frame.height - 20
+                barView.layer.borderColor = UIColor.black.cgColor
+                barView.layer.borderWidth = 0.5
+                barView.frame.size = CGSize(width: 40, height: 0)
+                barView.backgroundColor = UIColor.white
                 
-                backgroundView.alpha = 0.0
+                barGraphViewArray.append(barView)
                 
-                // separating bar graph views into testing data
-                for i in 0..<array.count - 2 {
-                    barGraphViewArray[i].frame.origin.x -= 25
-                }
+                // animating height of bar graph views
+                UIView.animate(withDuration: 1.0, animations: {
+                    let partialValue = value * 25
+                    barView.frame.size.height = CGFloat(-1 * partialValue)
+                    view.addSubview(barView)
+                })
+            }
+            
+            // animating bar graph views position
+            UIView.animate(withDuration: 1.5, delay: 2.0, options: .curveEaseIn, animations: {
+                gatheringLabel.alpha = 0.0
+                preparationLabel.alpha = 1.0
+                barGraphViewArray[0].frame.origin.x += 2*50
+                barGraphViewArray[2].frame.origin.x -= 2*50
                 
-                for i in 0...3 {
-                    barGraphViewArray[i].backgroundColor = backgroundColor
-                }
-                
-                // separating bar graph views into evaluation data
-                barGraphViewArray[4].backgroundColor = greenColor
-                barGraphViewArray[5].backgroundColor = greenColor
-                barGraphViewArray[4].frame.origin.x += 30
-                barGraphViewArray[5].frame.origin.x += 30
+                barGraphViewArray[1].frame.origin.x += 2*50
+                barGraphViewArray[3].frame.origin.x -= 2*50
             }) { (true) in
                 
-                // adding training data label to live view
-                let label1 = UILabel()
-              
-                label1.text = "Training Data"
-                label1.textColor = backgroundColor
-                label1.font = UIFont.systemFont(ofSize: 20)
-                label1.textAlignment = .center
-                label1.frame.size.width = 100
-                label1.frame.size.height = 60
-                label1.numberOfLines = 0
-                label1.frame.origin.x = backgroundView.frame.origin.x + 40
-                label1.frame.origin.y = view.center.y + 150
-                view.addSubview(label1)
-                
-                // adding evaluation data label to live view
-                let label2 = UILabel()
-                label2.text = "Evaluation Data"
-                label2.textColor = backgroundColor
-                label2.font = UIFont.systemFont(ofSize: 20)
-                label2.textAlignment = .center
-                label2.frame.size.width = 100
-                label2.frame.size.height = 60
-                label2.numberOfLines = 0
-                label2.frame.origin.x = backgroundView.frame.origin.x + 200 + 40
-                label2.frame.origin.y = view.center.y + 150
-                label2.textColor = greenColor
-                view.addSubview(label2)
-                
-                //showing success alert
-                PlaygroundPage.current.assessmentStatus = .pass(message: "Great job gathering the data! Lets move to [Next Step](@next)  of Machine Learning.")
-                
+                // changing alpha of background view from 1.0 to 0.0
+                UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
+                    
+                    backgroundView.alpha = 0.0
+                    
+                    // separating bar graph views into testing data
+                    for i in 0..<array.count - 2 {
+                        barGraphViewArray[i].frame.origin.x -= 25
+                    }
+                    
+                    for i in 0...3 {
+                        barGraphViewArray[i].backgroundColor = backgroundColor
+                    }
+                    
+                    // separating bar graph views into evaluation data
+                    barGraphViewArray[4].backgroundColor = greenColor
+                    barGraphViewArray[5].backgroundColor = greenColor
+                    barGraphViewArray[4].frame.origin.x += 30
+                    barGraphViewArray[5].frame.origin.x += 30
+                }) { (true) in
+                    
+                    // adding training data label to live view
+                    let label1 = UILabel()
+                    
+                    label1.text = "Training Data"
+                    label1.textColor = backgroundColor
+                    label1.font = UIFont.systemFont(ofSize: 20)
+                    label1.textAlignment = .center
+                    label1.frame.size.width = 100
+                    label1.frame.size.height = 60
+                    label1.numberOfLines = 0
+                    label1.frame.origin.x = backgroundView.frame.origin.x + 40
+                    label1.frame.origin.y = view.center.y + 125
+                    view.addSubview(label1)
+                    
+                    // adding evaluation data label to live view
+                    let label2 = UILabel()
+                    label2.text = "Evaluation Data"
+                    label2.textColor = backgroundColor
+                    label2.font = UIFont.systemFont(ofSize: 20)
+                    label2.textAlignment = .center
+                    label2.frame.size.width = 100
+                    label2.frame.size.height = 60
+                    label2.numberOfLines = 0
+                    label2.frame.origin.x = backgroundView.frame.origin.x + 200 + 40
+                    label2.frame.origin.y = view.center.y + 125
+                    label2.textColor = greenColor
+                    view.addSubview(label2)
+                    
+                    //showing success alert
+                    PlaygroundPage.current.assessmentStatus = .pass(message: "Great job gathering the data! Lets move to [Next Step](@next)  of Machine Learning.")
+                    
+                }
             }
+            PlaygroundPage.current.liveView = view
+            }
+        } else {
+            PlaygroundPage.current.assessmentStatus = .fail(hints: ["Data Array count cannot exceed 6"], solution: nil)
         }
-        PlaygroundPage.current.liveView = view
     }
     
     //Choosing Model
@@ -216,13 +227,13 @@ public class MachineLearning {
     }
     
     public func chooseModel(_ model : Model){
-    
+        
         // setting up basic layout
         setupChooseModelView()
-
+        
         // switch case for model
         switch model {
-            // if model is imageModel
+        // if model is imageModel
         case .imageModel:
             UIView.animate(withDuration: 1.0
                 , animations: {
