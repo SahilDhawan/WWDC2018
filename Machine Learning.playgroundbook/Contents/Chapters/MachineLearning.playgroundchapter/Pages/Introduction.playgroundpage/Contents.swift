@@ -15,7 +15,6 @@
  * Choosing a Model
  * Training
  * Evaluation
- * Parameter Tuning
  * Prediction
  
  ## Learn More
